@@ -11,6 +11,7 @@
   width: 413px;
   object-fit: cover;
   display: block;
+  border-radius: 10px;
 }
 .card__like-button {
   background-image: url(../images/like.svg);
@@ -25,4 +26,7 @@
   font-weight: 500;
   line-height: 1.2;
   font-size: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
