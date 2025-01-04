@@ -55,6 +55,9 @@
   font-weight: 500;
   line-height: 1;
 }
+.profile__edit-button-icon {
+  margin-right: 8px;
+}
 .profile__add-button {
   margin-left: auto;
   background-color: #212121;
@@ -67,6 +70,9 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 1;
+}
+.profile__add-button-icon {
+  margin-right: 8px;
 }
 
 @media screen and (max-width: 627px) {
