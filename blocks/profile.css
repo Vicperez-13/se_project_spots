@@ -67,9 +67,6 @@
 .profile__edit-button-icon {
   margin-right: 8px;
 }
-.profile__edit-button-icon:hover {
-  color: #212121;
-}
 .profile__add-button {
   margin-left: auto;
   background-color: #212121;
