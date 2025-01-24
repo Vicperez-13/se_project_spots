@@ -19,11 +19,12 @@
 
 .modal__container {
   position: relative;
-  background: #fff;
+  background: rgba(255, 255, 255, 1);
   padding: 32px 50px;
   max-width: 730px;
   width: 100%;
   box-sizing: border-box;
+  border-radius: 8px;
 }
 
 .modal__close-button {
@@ -32,7 +33,9 @@
   right: 50px;
   width: 40px;
   height: 40px;
-  background-image: url(../images/Close\ Icon.svg);
+  background-image: url(../images/close-icon.svg);
+  background-color: rgba(255, 255, 255, 1);
+  border: none;
 }
 
 .modal__title {
@@ -47,14 +50,28 @@
   flex-direction: column;
   gap: 8px;
   margin-bottom: 32px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1;
 }
 
 .modal__input {
   padding: 16px 12px;
+  border-radius: 8px;
+  border-color: rgba(33, 33, 33, 0.4);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1;
 }
 .modal__submit-button {
   width: 156px;
   padding: 18px 0;
+  background-color: #000;
+  color: rgba(255, 255, 255, 1);
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1;
 }
 
 @media screen and (max-width: 627px) {
@@ -70,6 +87,9 @@
     font-size: 20px;
     margin-bottom: 24px;
     margin: 10px 0 34px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1;
   }
 
   .modal__close-button {
@@ -78,6 +98,9 @@
   }
   .modal__label {
     margin-bottom: 24px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.1;
   }
 
   .modal__submit-button {
