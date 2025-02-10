@@ -41,7 +41,10 @@ const editModalDescriptionInput = editModal.querySelector(
 );
 
 const cardModal = document.querySelector("#add-card-modal");
+const cardForm = cardModal.querySelector(".modal__form");
 const cardModalCloseButton = cardModal.querySelector(".modal__close-button");
+const cardNameInput = cardModal.querySelector("#add-card-name-input");
+const cardLinkInput = cardModal.querySelector("#add-card-Link-input");
 
 const cardTemplate = document.querySelector("#card-template");
 const cardsList = document.querySelector(".cards__list");
@@ -75,6 +78,16 @@ function handleEditFormSubmit(evt) {
   profileDescription.textContent = editModalDescriptionInput.value;
   closeModal(editModal);
 }
+function handleAddCardSubmit(evt) {
+  evt.preventDefault();
+  // TODO - make image appear when adding card
+  const inputValues = { name: cardNameInput.value, link: "" };
+  const cardElement = getCardElement(inputValues);
+
+  //  make sure card appears at top of the list
+  cardsList.prepend(cardElement);
+  closeModal(cardModal);
+}
 profileEditButton.addEventListener("click", () => {
   editModalNameInput.value = profileName.textContent;
   editModalDescriptionInput.value = profileDescription.textContent;
@@ -93,6 +106,7 @@ cardModalCloseButton.addEventListener("click", () => {
   closeModal(cardModal);
 });
 editFormElement.addEventListener("submit", handleEditFormSubmit);
+cardForm.addEventListener("submit", handleAddCardSubmit);
 
 intialCards.forEach((item) => {
   const cardElement = getCardElement(item);
