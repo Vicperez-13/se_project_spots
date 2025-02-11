@@ -27,6 +27,15 @@
 .card__like-button:hover {
   opacity: 1;
 }
+
+.card__like-button_liked {
+  background-image: url(../images/liked.svg);
+  opacity: 1;
+}
+
+.card__like-button_liked:hover {
+  background-image: url(../images/liked-hover.svg);
+}
 .card__title {
   font-weight: 500;
   line-height: 1.2;

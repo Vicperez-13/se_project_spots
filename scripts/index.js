@@ -56,10 +56,19 @@ function getCardElement(data) {
 
   const cardNameEl = cardElement.querySelector(".card__title");
   const cardImageEl = cardElement.querySelector(".card__image");
+  const cardLikedButton = cardElement.querySelector(".card__like-button");
+  // TODO - select the delete button
 
   cardNameEl.textContent = data.name;
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
+
+  cardLikedButton.addEventListener("click", () => {
+    cardLikedButton.classList.toggle("card__like-button_liked");
+  });
+
+  //TODO - set the listener on delete button
+  // the handler shoudl remove the card from the DOM
 
   return cardElement;
 }
@@ -84,7 +93,6 @@ function handleAddCardSubmit(evt) {
   const inputValues = { name: cardNameInput.value, link: "" };
   const cardElement = getCardElement(inputValues);
 
-  //  make sure card appears at top of the list
   cardsList.prepend(cardElement);
   closeModal(cardModal);
 }
