@@ -68,7 +68,7 @@ function getCardElement(data) {
     cardLikedButton.classList.toggle("card__like-button_liked");
   });
   cardDeleteButton.addEventListener("click", () => {
-    cardDeleteButton.remove();
+    cardElement.remove("");
   });
   //TODO - set the listener on delete button
   // the handler shoudl remove the card from the DOM
@@ -92,8 +92,9 @@ function handleEditFormSubmit(evt) {
 }
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
+
   // TODO - make image appear when adding card
-  const inputValues = { name: cardNameInput.value, link: "" };
+  const inputValues = { name: cardNameInput.value, link: cardImageEl.value };
   const cardElement = getCardElement(inputValues);
 
   cardsList.prepend(cardElement);
