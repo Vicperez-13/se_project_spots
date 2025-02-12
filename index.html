@@ -92,7 +92,11 @@
       </div>
       <div class="modal" id="add-card-modal">
         <div class="modal__container">
-          <button type="button" class="modal__close-button"></button>
+          <button
+            aria-label="Close modal"
+            type="button"
+            class="modal__close-button"
+          ></button>
           <h2 class="modal__title">New post</h2>
           <form class="modal__form" id="add-card-form">
             <label for="add-card-link-input" class="modal__label">
@@ -118,6 +122,17 @@
             <button type="submit" class="modal__submit-button">Save</button>
           </form>
         </div>
+      </div>
+    </div>
+    <div class="modal" id="preview-modal">
+      <div class="modal__container modal__container_type_preview">
+        <button
+          aria-label="Close modal"
+          type="button"
+          class="modal__close-button modal__close-button_preview"
+        ></button>
+        <img class="modal__image" src="" alt="" />
+        <p class="modal__caption">val thoreas</p>
       </div>
     </div>
     <script src="./scripts/index.js"></script>

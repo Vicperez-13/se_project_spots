@@ -44,7 +44,15 @@ const cardModal = document.querySelector("#add-card-modal");
 const cardForm = cardModal.querySelector(".modal__form");
 const cardModalCloseButton = cardModal.querySelector(".modal__close-button");
 const cardNameInput = cardModal.querySelector("#add-card-name-input");
-const cardLinkInput = cardModal.querySelector("#add-card-Link-input");
+const cardLinkInput = cardModal.querySelector("#add-card-link-input");
+
+// select the modal
+const previewModal = document.querySelector("#preview-modal");
+const previewModalImageEl = previewModal.querySelector(".modal__image");
+const previewModalCaptionEl = previewModal.querySelector(".modal__caption");
+const previewModalCloseButton = previewModal.querySelector(
+  ".modal__close-button_preview"
+);
 
 const cardTemplate = document.querySelector("#card-template");
 const cardsList = document.querySelector(".cards__list");
@@ -58,7 +66,6 @@ function getCardElement(data) {
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardLikedButton = cardElement.querySelector(".card__like-button");
   const cardDeleteButton = cardElement.querySelector(".card__delete-button");
-  // TODO - select the delete button
 
   cardNameEl.textContent = data.name;
   cardImageEl.src = data.link;
@@ -67,11 +74,21 @@ function getCardElement(data) {
   cardLikedButton.addEventListener("click", () => {
     cardLikedButton.classList.toggle("card__like-button_liked");
   });
+
+  cardImageEl.addEventListener("click", () => {
+    openModal(previewModal);
+    previewModalImageEl.src = data.link;
+    previewModalCaptionEl.textContent = data.name;
+    previewModalImageEl.alt = data.name;
+  });
+
+  previewModalCloseButton.addEventListener("click", () => {
+    closeModal(previewModal);
+  });
+
   cardDeleteButton.addEventListener("click", () => {
     cardElement.remove("");
   });
-  //TODO - set the listener on delete button
-  // the handler shoudl remove the card from the DOM
 
   return cardElement;
 }
@@ -94,7 +111,7 @@ function handleAddCardSubmit(evt) {
   evt.preventDefault();
 
   // TODO - make image appear when adding card
-  const inputValues = { name: cardNameInput.value, link: cardImageEl.value };
+  const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
   const cardElement = getCardElement(inputValues);
 
   cardsList.prepend(cardElement);
@@ -124,3 +141,6 @@ intialCards.forEach((item) => {
   const cardElement = getCardElement(item);
   cardsList.prepend(cardElement);
 });
+
+console.log("Card Name:", cardNameInput.value);
+console.log("Card link:", cardLinkInput.value);
