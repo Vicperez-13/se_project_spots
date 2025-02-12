@@ -44,14 +44,17 @@
 
 .card__delete-button {
   background-image: url(../images/delete.svg);
-  width: 32px;
-  height: 32px;
-  border: 2px red;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  border: none;
   border-color: transparent;
   background-color: transparent;
   position: absolute;
-  top: 10px;
-  left: 371px;
+  top: 8px;
+  right: 8px;
+  /* left: 371px; */
   cursor: pointer;
 }
 .card__delete-button:hover {
@@ -69,6 +72,9 @@
   margin: 0;
 }
 @media screen and (max-width: 627px) {
+  .card {
+    position: relative;
+  }
   .card__image {
     height: 288px;
   }
@@ -79,5 +85,9 @@
   .card__like-button {
     height: 18px;
     width: 20px;
+  }
+  .card__delete-button {
+    top: 5px;
+    right: 5px;
   }
 }
