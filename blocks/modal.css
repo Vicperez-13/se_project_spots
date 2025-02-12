@@ -165,6 +165,10 @@
     font-size: 16px;
     line-height: 1.1;
   }
+  .modal__caption {
+    font-weight: 500;
+    font-size: 16px;
+  }
 
   .modal__submit-button {
     width: 100%;
