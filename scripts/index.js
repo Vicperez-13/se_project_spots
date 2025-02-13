@@ -84,7 +84,7 @@ function getCardElement(data) {
   });
 
   // previewModalCloseButton.addEventListener("click", () => {
-  closeModal(previewModal);
+  //   closeModal(previewModal);
   // });
 
   cardDeleteButton.addEventListener("click", () => {
@@ -93,6 +93,10 @@ function getCardElement(data) {
 
   return cardElement;
 }
+
+previewModalCloseButton.addEventListener("click", () => {
+  closeModal(previewModal);
+});
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
@@ -147,6 +151,3 @@ intialCards.forEach((item) => {
   const cardElement = getCardElement(item);
   cardsList.prepend(cardElement);
 });
-
-console.log("Card Name:", cardNameInput.value);
-console.log("Card link:", cardLinkInput.value);
