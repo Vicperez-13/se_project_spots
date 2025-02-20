@@ -189,9 +189,6 @@
   }
 }
 @media screen and (max-width: 320px) {
-  .modal__close-button_preview {
-    left: auto;
-  }
   .modal__image {
     max-width: 100%;
   }
