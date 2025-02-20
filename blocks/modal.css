@@ -81,8 +81,6 @@
 
 .modal__close-button_preview {
   background-image: url(../images/Close-Icon-2.svg);
-  top: auto;
-  right: auto;
   opacity: 1;
   background-color: transparent;
   border-color: transparent;
@@ -168,7 +166,6 @@
   .modal__close-button_preview {
     position: absolute;
     left: auto;
-    top: auto;
     top: -35px;
   }
 
