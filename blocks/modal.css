@@ -125,6 +125,14 @@
 .modal__input:hover {
   opacity: 1;
 }
+
+.modal__error {
+  color: #ff000099;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
 .modal__submit-button {
   width: 156px;
   padding: 18px 0;
