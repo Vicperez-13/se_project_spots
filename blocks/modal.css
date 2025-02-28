@@ -125,7 +125,9 @@
 .modal__input:hover {
   opacity: 1;
 }
-
+.modal__input_type_error {
+  border: 1px solid rgba(255, 0, 0, 0.6);
+}
 .modal__error {
   color: #ff000099;
   font-size: 16px;
