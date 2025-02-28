@@ -10,7 +10,7 @@ const checkInputValidity = (formEl, inputEl) => {
 };
 
 const setEventListeners = (formEl) => {
-  const inputList = Array.from(formEl.querySelector(".modal__input"));
+  const inputList = Array.from(formEl.querySelectorAll(".modal__input"));
   const buttonElement = formEl.querySelector(".modal__submit-button");
 
   // TODO - handle initial states
