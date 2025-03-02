@@ -38,14 +38,13 @@ const toggleButtonState = (inputList, buttonEl) => {
     disableButton(buttonEl);
   } else {
     buttonEl.disabled = false;
-    // TODO - remove the disabled class
+    buttonEl.classList.remove("modal__submit-button_disabled");
   }
 };
 
 const disableButton = (buttonEl) => {
   buttonEl.disabled = true;
-  // TODO - Add a modifier class to the buttonEl to make it grey
-  // Dont forget the CSS
+  buttonEl.classList.add("modal__submit-button_disabled");
 };
 
 // const resetValidation = (formEl, inputList) => {
