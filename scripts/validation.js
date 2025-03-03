@@ -2,7 +2,7 @@ const settings = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__submit-button",
-  inactiveButtonClass: "modal__button_disabled",
+  inactiveButtonClass: "modal__submit-button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error",
 };
@@ -33,12 +33,12 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-const toggleButtonState = (inputList, buttonEl) => {
+const toggleButtonState = (inputList, buttonEl, config) => {
   if (hasInvalidInput(inputList)) {
     disableButton(buttonEl);
   } else {
     buttonEl.disabled = false;
-    buttonEl.classList.remove("modal__submit-button_disabled");
+    buttonEl.classList.remove(config.inactiveButtonClass);
   }
 };
 
@@ -47,11 +47,11 @@ const disableButton = (buttonEl) => {
   buttonEl.classList.add("modal__submit-button_disabled");
 };
 
-// const resetValidation = (formEl, inputList) => {
-//   inputList.forEach((input) => {
-//     hideInputError(formEl, input);
-//   });
-// };
+const resetValidation = (formEl, inputList, config) => {
+  inputList.forEach((input, config) => {
+    hideInputError(formEl, input, config);
+  });
+};
 
 const setEventListeners = (formEl, config) => {
   const inputList = Array.from(formEl.querySelectorAll(config.inputSelector));
@@ -79,5 +79,5 @@ const enableValidation = (config) => {
     setEventListeners(formEl, config);
   });
 };
-
+console.log("Checking  if profileEditButton exists:", profileEditButton);
 enableValidation(settings);

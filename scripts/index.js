@@ -95,11 +95,15 @@ previewModalCloseButton.addEventListener("click", () => {
 function openModal(modal) {
   modal.classList.add("modal_opened");
 
-  modal.addEventListener("mousedown", (evt) => {
+  const handleCLickOutside = (evt) => {
     if (evt.target === modal) {
       closeModal(modal);
+      modal.removeEventListener("mousedown", handleCLickOutside);
     }
-  });
+  };
+
+  modal.addEventListener("mousedown", handleCLickOutside);
+
   document.addEventListener("keydown", handleEscapeKey);
 }
 
@@ -137,10 +141,10 @@ function handleAddCardSubmit(evt) {
 profileEditButton.addEventListener("click", () => {
   editModalNameInput.value = profileName.textContent;
   editModalDescriptionInput.value = profileDescription.textContent;
-  // resetValidation(editFormElement, [
-  //   editModalNameInput,
-  //   editModalDescriptionInput,
-  // ]);
+  resetValidation(editFormElement, [
+    editModalNameInput,
+    editModalDescriptionInput,
+  ]);
   openModal(editModal);
 });
 
