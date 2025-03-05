@@ -95,12 +95,9 @@ previewModalCloseButton.addEventListener("click", () => {
 function openModal(modal) {
   modal.classList.add("modal_opened");
 
-  const handleCLickOutside = (evt) => {
-    if (evt.target === modal) {
-      closeModal(modal);
-      modal.removeEventListener("mousedown", handleCLickOutside);
-    }
-  };
+  if (evt.target === modal) {
+    closeModal(modal);
+  }
 
   modal.addEventListener("mousedown", handleCLickOutside);
 
