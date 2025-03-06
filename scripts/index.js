@@ -95,10 +95,11 @@ previewModalCloseButton.addEventListener("click", () => {
 function openModal(modal) {
   modal.classList.add("modal_opened");
 
-  if (evt.target === modal) {
-    closeModal(modal);
-  }
-
+  const handleCLickOutside = (evt) => {
+    if (evt.target === modal) {
+      closeModal(modal);
+    }
+  };
   modal.addEventListener("mousedown", handleCLickOutside);
 
   document.addEventListener("keydown", handleEscapeKey);
