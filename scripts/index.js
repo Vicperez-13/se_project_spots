@@ -100,6 +100,7 @@ function openModal(modal) {
       closeModal(modal);
     }
   };
+  modal.removeEventListener("mousedown", handleCLickOutside);
   modal.addEventListener("mousedown", handleCLickOutside);
 
   document.addEventListener("keydown", handleEscapeKey);
