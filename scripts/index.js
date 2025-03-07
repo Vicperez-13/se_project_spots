@@ -92,16 +92,16 @@ previewModalCloseButton.addEventListener("click", () => {
   closeModal(previewModal);
 });
 
+const handleCLickOutside = (evt) => {
+  const modal = document.querySelector(".modal_opened");
+  if (evt.target === modal) {
+    closeModal(modal);
+  }
+};
+
 function openModal(modal) {
   modal.classList.add("modal_opened");
-
-  const handleCLickOutside = (evt) => {
-    if (evt.target === modal) {
-      closeModal(modal);
-    }
-  };
-  modal.addEventListener("mousedown", handleCLickOutside);
-
+  document.addEventListener("mousedown", handleCLickOutside);
   document.addEventListener("keydown", handleEscapeKey);
 }
 
@@ -116,7 +116,7 @@ function handleEscapeKey(evt) {
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-
+  document.removeEventListener("mousedown", handleCLickOutside);
   document.removeEventListener("keydown", handleEscapeKey);
 }
 
