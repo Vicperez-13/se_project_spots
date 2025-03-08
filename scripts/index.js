@@ -92,8 +92,7 @@ previewModalCloseButton.addEventListener("click", () => {
   closeModal(previewModal);
 });
 
-const handleCLickOutside = (evt) => {
-  const modal = document.querySelector(".modal_opened");
+const handleClickOutside = (evt, modal) => {
   if (evt.target === modal) {
     closeModal(modal);
   }
@@ -101,7 +100,9 @@ const handleCLickOutside = (evt) => {
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  document.addEventListener("mousedown", handleCLickOutside);
+  document.addEventListener("mousedown", (evt) =>
+    handleClickOutside(evt, modal)
+  );
   document.addEventListener("keydown", handleEscapeKey);
 }
 
@@ -116,7 +117,9 @@ function handleEscapeKey(evt) {
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  document.removeEventListener("mousedown", handleCLickOutside);
+  document.removeEventListener("mousedown", (evt) =>
+    handleClickOutside(evt, modal)
+  );
   document.removeEventListener("keydown", handleEscapeKey);
 }
 
@@ -135,7 +138,6 @@ function handleAddCardSubmit(evt) {
   cardsList.prepend(cardElement);
   evt.target.reset();
   closeModal(cardModal);
-  resetValidation(evt.target, [cardNameInput, cardLinkInput], settings);
 }
 profileEditButton.addEventListener("click", () => {
   editModalNameInput.value = profileName.textContent;
