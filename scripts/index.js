@@ -117,9 +117,7 @@ function handleEscapeKey(evt) {
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  document.removeEventListener("mousedown", (evt) =>
-    handleClickOutside(evt, modal)
-  );
+  document.removeEventListener("mousedown", handleClickOutside);
   document.removeEventListener("keydown", handleEscapeKey);
 }
 
@@ -137,6 +135,10 @@ function handleAddCardSubmit(evt) {
 
   cardsList.prepend(cardElement);
   evt.target.reset();
+  const inputList = Array.from(
+    cardForm.querySelectorAll(settings.inputSelector)
+  );
+  resetValidation(cardForm, inputList, settings);
   closeModal(cardModal);
 }
 profileEditButton.addEventListener("click", () => {
@@ -159,6 +161,11 @@ cardEditButton.addEventListener("click", () => {
 });
 
 cardModalCloseButton.addEventListener("click", () => {
+  cardForm.reset();
+  const inputList = Array.from(
+    cardForm.querySelectorAll(settings.inputSelector)
+  );
+  resetValidation(cardForm, inputList, settings);
   closeModal(cardModal);
 });
 editFormElement.addEventListener("submit", handleEditFormSubmit);
