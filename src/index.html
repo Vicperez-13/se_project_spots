@@ -3,22 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
     <meta name="author" content="Victor Morales Perez" />
-    <!-- <meta name="keywords" content="add" /> -->
-    <!-- <meta name="description" content="?????????????" /> -->
-    <link rel="stylesheet" href="./pages/index.css" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <title>Spots</title>
   </head>
   <body>
     <div class="page">
       <header class="header">
-        <img src="./images/logo.svg" alt="Spots logo" class="header__logo" />
+        <img
+          src="<%= require('./images/logo.svg') %>"
+          alt="Spots logo"
+          class="header__logo"
+        />
       </header>
       <main class="content">
         <section class="profile page__section">
           <img
-            src="./images/Bessie-Coleman.png"
+            src="<%= require('./images/Bessie-Coleman.png') %>"
             alt="B&W Bessie Coleman image."
             class="profile__avatar"
           />
@@ -27,7 +29,7 @@
             <p class="profile__description">Civil Aviator</p>
             <button type="button" class="profile__edit-button">
               <img
-                src="./images/pencil.svg"
+                src="<%= require('./images/pencil.svg') %>"
                 alt="edit pencil"
                 class="profile__edit-button-icon"
               />Edit Profile
@@ -35,7 +37,7 @@
           </div>
           <button type="button" class="profile__add-button">
             <img
-              src="./images/plus.svg"
+              src="<%= require('./images/plus.svg') %>"
               alt="plus icon"
               class="profile__add-button-icon"
             />New Post
@@ -152,7 +154,5 @@
         <p class="modal__caption">val thoreas</p>
       </div>
     </div>
-    <script src="./scripts/index.js"></script>
-    <script src="./scripts/validation.js"></script>
   </body>
 </html>
