@@ -41,13 +41,17 @@ const api = new Api({
   },
 });
 
+//destructure the secon item in the callback of the .then()
 api
-  .getInitialCards()
-  .then((cards) => {
+  .getAppInfo()
+  .then(([cards]) => {
     cards.forEach((item) => {
       const cardElement = getCardElement(item);
       cardsList.prepend(cardElement);
     });
+    //handle the user's information
+    // - set the src of the avatar image
+    // - set the textContent of both the text elements
   })
   .catch((err) => {
     console.error(err);
