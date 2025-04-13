@@ -44,23 +44,23 @@ const api = new Api({
 //destructure the secon item in the callback of the .then()
 api
   .getAppInfo()
-  .then(([cards]) => {
-    cards.forEach((item) => {
+  .then(([InitialCards, UserInfo]) => {
+    InitialCards.forEach((item) => {
       const cardElement = getCardElement(item);
       cardsList.prepend(cardElement);
     });
-    //handle the user's information
-    // - set the src of the avatar image
-    // - set the textContent of both the text elements
+    profileName.textContent = UserInfo.name;
+    profileDescription.textContent = UserInfo.about;
+    profileAvatar.src = UserInfo.avatar;
   })
   .catch((err) => {
     console.error(err);
   });
-
 const profileEditButton = document.querySelector(".profile__edit-button");
 const cardEditButton = document.querySelector(".profile__add-button");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
+const profileAvatar = document.querySelector(".profile__avatar");
 
 const editModal = document.querySelector("#edit-modal");
 const editFormElement = editModal.querySelector(".modal__form");
