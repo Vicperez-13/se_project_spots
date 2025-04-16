@@ -41,7 +41,7 @@ const api = new Api({
   },
 });
 
-//destructure the secon item in the callback of the .then()
+//destructure the second item in the callback of the .then()
 api
   .getAppInfo()
   .then(([InitialCards, UserInfo]) => {
@@ -151,9 +151,18 @@ function closeModal(modal) {
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
-  profileName.textContent = editModalNameInput.value;
-  profileDescription.textContent = editModalDescriptionInput.value;
-  closeModal(editModal);
+  api
+    .editUserInfo({
+      name: editModalNameInput.value,
+      about: editModalDescriptionInput.value,
+    })
+    .then((data) => {
+      //TODO - Use data argument instead of the input values
+      profileName.textContent = editModalNameInput.value;
+      profileDescription.textContent = editModalDescriptionInput.value;
+      closeModal(editModal);
+    })
+    .catch(console.error);
 }
 function handleAddCardSubmit(evt) {
   evt.preventDefault();

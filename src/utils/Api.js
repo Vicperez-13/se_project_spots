@@ -5,7 +5,7 @@ class Api {
   }
 
   getAppInfo() {
-    // call getUserInfo in array...
+
     return Promise.all([this.getInitialCards(), this._getUserInfo()]);
   }
   getInitialCards() {
@@ -18,10 +18,26 @@ class Api {
       return Promise.reject(`Error: ${res.status}`);
     });
   }
-  // Create another Method, getUserInfo (different base url)
+
   _getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
+  editUserInfo({ name, about }) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        about,
+      }),
     }).then((res) => {
       if (res.ok) {
         return res.json();
