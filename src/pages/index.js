@@ -58,10 +58,13 @@ api
   });
 const profileEditButton = document.querySelector(".profile__edit-button");
 const cardEditButton = document.querySelector(".profile__add-button");
+const avatarEditButton = document.querySelector(".profile__avatar-button");
+
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 const profileAvatar = document.querySelector(".profile__avatar");
 
+//edit form Elements
 const editModal = document.querySelector("#edit-modal");
 const editFormElement = editModal.querySelector(".modal__form");
 const editModalCloseButton = editModal.querySelector(".modal__close-button");
@@ -70,12 +73,23 @@ const editModalDescriptionInput = editModal.querySelector(
   "#profile-description-input"
 );
 
+//card form Elements
 const cardModal = document.querySelector("#add-card-modal");
 const cardForm = cardModal.querySelector(".modal__form");
 const cardModalCloseButton = cardModal.querySelector(".modal__close-button");
 const cardNameInput = cardModal.querySelector("#add-card-name-input");
 const cardLinkInput = cardModal.querySelector("#add-card-link-input");
 
+//avatar form element
+const avatarModal = document.querySelector("#avatar-modal");
+const avatarForm = avatarModal.querySelector(".modal__form");
+const avatarModalCloseButton = avatarModal.querySelector(
+  ".modal__close-button"
+);
+const avatarSubmitButton = avatarModal.querySelector(".modal__button");
+const avatarInput = avatarModal.querySelector("#profile-avatar-input");
+
+//Preview image popup Elements
 const previewModal = document.querySelector("#preview-modal");
 const previewModalImageEl = previewModal.querySelector(".modal__image");
 const previewModalCaptionEl = previewModal.querySelector(".modal__caption");
@@ -157,9 +171,8 @@ function handleEditFormSubmit(evt) {
       about: editModalDescriptionInput.value,
     })
     .then((data) => {
-      //TODO - Use data argument instead of the input values
-      profileName.textContent = editModalNameInput.value;
-      profileDescription.textContent = editModalDescriptionInput.value;
+      profileName.textContent = data.name;
+      profileDescription.textContent = data.about;
       closeModal(editModal);
     })
     .catch(console.error);
@@ -178,6 +191,25 @@ function handleAddCardSubmit(evt) {
   resetValidation(cardForm, inputList, settings);
   closeModal(cardModal);
 }
+
+//finish avatar submission handler
+function handleAvatarSubmit(evt) {
+  evt.preventDefault();
+  api
+    .editAvatarInfo({ avatar: avatarInput.value })
+    .then((data) => {
+      profileAvatar.src = data.avatar;
+      profileAvatar.alt = "Profile avatar";
+      evt.target.reset();
+      const inputList = Array.from(
+        avatarForm.querySelectorAll(settings.inputSelector)
+      );
+      resetValidation(avatarForm, inputList, settings);
+      closeModal(avatarModal);
+    })
+    .catch(console.error);
+}
+
 profileEditButton.addEventListener("click", () => {
   editModalNameInput.value = profileName.textContent;
   editModalDescriptionInput.value = profileDescription.textContent;
@@ -203,9 +235,13 @@ cardModalCloseButton.addEventListener("click", () => {
 editFormElement.addEventListener("submit", handleEditFormSubmit);
 cardForm.addEventListener("submit", handleAddCardSubmit);
 
-// intialCards.forEach((item) => {
-//   const cardElement = getCardElement(item);
-//   cardsList.prepend(cardElement);
-// });
+avatarEditButton.addEventListener("click", () => {
+  openModal(avatarModal);
+});
+avatarForm.addEventListener("submit", handleAvatarSubmit);
+
+avatarModalCloseButton.addEventListener("click", () => {
+  closeModal(avatarModal);
+});
 
 enableValidation(settings);

@@ -19,11 +19,20 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            src="<%= require('./images/Bessie-Coleman.png') %>"
-            alt="B&W Bessie Coleman image."
-            class="profile__avatar"
-          />
+          <div class="profile__avatar-container">
+            <button class="profile__avatar-button">
+              <img
+                src="<%= require('./images/light-pencil.svg') %>"
+                alt="pencil icon"
+                class="profile__pencil-icon"
+              />
+            </button>
+            <img
+              src="<%= require('./images/Bessie-Coleman.png') %>"
+              alt="B&W Bessie Coleman image."
+              class="profile__avatar"
+            />
+          </div>
           <div class="profile__column">
             <h1 class="profile__name">Bessie Coleman</h1>
             <p class="profile__description">Civil Aviator</p>
@@ -152,6 +161,28 @@
         ></button>
         <img class="modal__image" src="" alt="" />
         <p class="modal__caption">val thoreas</p>
+      </div>
+    </div>
+
+    <div class="modal" id="avatar-modal">
+      <div class="modal__container">
+        <button type="button" class="modal__close-button"></button>
+        <h2 class="modal__title">Edit avatar</h2>
+        <form name="edit-avatar" class="modal__form" novalidate>
+          <label for="profile-avatar-input" class="modal__label">
+            Avatar
+            <input
+              id="profile-avatar-input"
+              type="text"
+              name="avatar"
+              class="modal__input"
+              placeholder="avatar goes here"
+              required
+            />
+            <span id="profile-avatar-input-error" class="modal__error"></span>
+          </label>
+          <button type="submit" class="modal__submit-button">Save</button>
+        </form>
       </div>
     </div>
   </body>
