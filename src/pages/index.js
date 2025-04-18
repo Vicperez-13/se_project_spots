@@ -116,12 +116,19 @@ function getCardElement(data) {
   const cardLikedButton = cardElement.querySelector(".card__like-button");
   const cardDeleteButton = cardElement.querySelector(".card__delete-button");
 
+  //todo - if the card is liked, set the active class on the card.
+
   cardNameEl.textContent = data.name;
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
 
   cardLikedButton.addEventListener("click", () => {
     cardLikedButton.classList.toggle("card__like-button_liked");
+    //check whether card is currenlty liked or not
+    //check whether the card is currently liked or not
+    //call the changeLikeStatus method, passing it the appropriate arguments
+    //handle the response(.then and .catch)
+    //in the .then, toggle the active class
   });
 
   cardImageEl.addEventListener("click", () => {
