@@ -94,7 +94,11 @@
 .modal__close-button:hover {
   opacity: 1;
 }
-
+.modal__close-button-delete {
+  right: -52px;
+  top: -10px;
+  background-color: transparent;
+}
 .modal__title {
   margin: 0 0 32px;
   font-weight: 500;
@@ -146,7 +150,28 @@
   line-height: 1;
   cursor: pointer;
 }
+.modal__submit-button-delete {
+  background-color: #ff6565;
+  color: #000;
+  border: none;
+}
 
+.modal__submit-button-delete:hover {
+  background-color: #ff3333;
+}
+.modal__submit-button-cancel {
+  background-color: #fff;
+  color: #000;
+}
+.modal__submit-button-cancel:hover {
+  background-color: #000;
+  color: #fff;
+}
+.modal__delete {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
 .modal__submit-button_disabled {
   background-color: #ccc;
   color: rgba(0, 0, 0, 0.5);

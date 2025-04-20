@@ -5,33 +5,9 @@ import {
   resetValidation,
 } from "../scripts/validation.js";
 import Api from "../utils/Api.js";
+import { setButtonText } from "../utils/helpers.js";
 
-// const intialCards = [
-//   {
-//     name: "Val Thorens",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg",
-//   },
-//   {
-//     name: "Restaurant terrace",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/2-photo-by-ceiline-from-pexels.jpg",
-//   },
-//   {
-//     name: "An outdoor cafe",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/3-photo-by-tubanur-dogan-from-pexels.jpg",
-//   },
-//   {
-//     name: "A very long bridge, over the forest and through the trees",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/4-photo-by-maurice-laschet-from-pexels.jpg",
-//   },
-//   {
-//     name: "Tunnel with morning light",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/5-photo-by-van-anh-nguyen-from-pexels.jpg",
-//   },
-//   {
-//     name: "Mountain house",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
-//   },
-// ];
+let userId;
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -44,14 +20,15 @@ const api = new Api({
 //destructure the second item in the callback of the .then()
 api
   .getAppInfo()
-  .then(([InitialCards, UserInfo]) => {
+  .then(([InitialCards, userInfo]) => {
+    userId = userInfo._id;
     InitialCards.forEach((item) => {
       const cardElement = getCardElement(item);
       cardsList.prepend(cardElement);
     });
-    profileName.textContent = UserInfo.name;
-    profileDescription.textContent = UserInfo.about;
-    profileAvatar.src = UserInfo.avatar;
+    profileName.textContent = userInfo.name;
+    profileDescription.textContent = userInfo.about;
+    profileAvatar.src = userInfo.avatar;
   })
   .catch((err) => {
     console.error(err);
@@ -116,19 +93,27 @@ function getCardElement(data) {
   const cardLikedButton = cardElement.querySelector(".card__like-button");
   const cardDeleteButton = cardElement.querySelector(".card__delete-button");
 
-  //todo - if the card is liked, set the active class on the card.
-
   cardNameEl.textContent = data.name;
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
 
+  if (data.likes && data.likes.some((user) => user._id === userId)) {
+    cardLikeButton.classList.add("card__like-button_liked");
+  }
+
   cardLikedButton.addEventListener("click", () => {
-    cardLikedButton.classList.toggle("card__like-button_liked");
-    //check whether card is currenlty liked or not
-    //check whether the card is currently liked or not
-    //call the changeLikeStatus method, passing it the appropriate arguments
-    //handle the response(.then and .catch)
-    //in the .then, toggle the active class
+    const isLiked = cardLikedButton.classList.contains(
+      "card__like-button_liked"
+    );
+
+    api
+      .handleLike({ id: data._id, isLiked: isLiked })
+      .then(() => {
+        cardLikedButton.classList.toggle("card__like-button_liked");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   });
 
   cardImageEl.addEventListener("click", () => {
@@ -149,13 +134,20 @@ function getCardElement(data) {
 
 function handleDeleteSubmit(evt) {
   evt.preventDefault();
+
+  const submitButton = evt.submitter;
+  console.log("Button text:", submitButton.textContent); // Add this line
+  setButtonText(submitButton, true);
   api
     .deleteCard({ id: selectedCardId })
     .then(() => {
       selectedCard.remove();
       closeModal(deleteModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(submitButton, false);
+    });
 }
 
 previewModalCloseButton.addEventListener("click", () => {
@@ -191,6 +183,8 @@ function closeModal(modal) {
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
+  const submitButton = evt.submitter;
+  setButtonText(submitButton, true);
   api
     .editUserInfo({
       name: editModalNameInput.value,
@@ -201,10 +195,17 @@ function handleEditFormSubmit(evt) {
       profileDescription.textContent = data.about;
       closeModal(editModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(submitButton, false);
+    });
 }
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
+
+  const submitButton = evt.submitter;
+  setButtonText(submitButton, true);
+
   const inputValues = {
     name: cardNameInput.value,
     link: cardLinkInput.value,
@@ -220,11 +221,17 @@ function handleAddCardSubmit(evt) {
     })
     .catch((err) => {
       console.error(err);
+    })
+    .finally(() => {
+      setButtonText(submitButton, false);
     });
 }
 
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
+
+  const submitButton = evt.submitter;
+  setButtonText(submitButton, true);
   api
     .editAvatarInfo({ avatar: avatarInput.value })
     .then((data) => {
@@ -237,7 +244,10 @@ function handleAvatarSubmit(evt) {
       resetValidation(avatarForm, inputList, settings);
       closeModal(avatarModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(submitButton, false);
+    });
 }
 
 profileEditButton.addEventListener("click", () => {

@@ -89,7 +89,7 @@ class Api {
 
   handleLike({ id, isLiked }) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-      method: isliked ? "DELETE" : "PUT",
+      method: isLiked ? "DELETE" : "PUT",
       headers: this._headers,
     }).then((res) => {
       if (res.ok) {
