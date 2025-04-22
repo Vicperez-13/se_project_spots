@@ -3,6 +3,7 @@ import {
   enableValidation,
   settings,
   resetValidation,
+  disableButton,
 } from "../scripts/validation.js";
 import Api from "../utils/Api.js";
 import { setButtonText } from "../utils/helpers.js";
@@ -17,12 +18,11 @@ const api = new Api({
   },
 });
 
-//destructure the second item in the callback of the .then()
 api
   .getAppInfo()
-  .then(([InitialCards, userInfo]) => {
+  .then(([initialCards, userInfo]) => {
     userId = userInfo._id;
-    InitialCards.forEach((item) => {
+    initialCards.forEach((item) => {
       const cardElement = getCardElement(item);
       cardsList.prepend(cardElement);
     });
@@ -69,7 +69,12 @@ const avatarInput = avatarModal.querySelector("#profile-avatar-input");
 //Delete form elements
 const deleteModal = document.querySelector("#delete-modal");
 const deleteForm = deleteModal.querySelector(".modal__form");
-
+const deleteModalCloseButton = deleteModal.querySelector(
+  ".modal__close-button"
+);
+const deleteModalCancelButton = deleteModal.querySelector(
+  ".modal__submit-button-cancel"
+);
 //Preview image popup Elements
 const previewModal = document.querySelector("#preview-modal");
 const previewModalImageEl = previewModal.querySelector(".modal__image");
@@ -97,8 +102,8 @@ function getCardElement(data) {
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
 
-  if (data.likes && data.likes.some((user) => user._id === userId)) {
-    cardLikeButton.classList.add("card__like-button_liked");
+  if (data.isLiked) {
+    cardLikedButton.classList.add("card__like-button_liked");
   }
 
   cardLikedButton.addEventListener("click", () => {
@@ -136,7 +141,7 @@ function handleDeleteSubmit(evt) {
   evt.preventDefault();
 
   const submitButton = evt.submitter;
-  console.log("Button text:", submitButton.textContent); // Add this line
+  console.log("Button text:", submitButton.textContent);
   setButtonText(submitButton, true);
   api
     .deleteCard({ id: selectedCardId })
@@ -218,6 +223,7 @@ function handleAddCardSubmit(evt) {
       cardsList.prepend(cardElement);
       closeModal(cardModal);
       evt.target.reset();
+      disableButton(submitButton, settings);
     })
     .catch((err) => {
       console.error(err);
@@ -238,6 +244,7 @@ function handleAvatarSubmit(evt) {
       profileAvatar.src = data.avatar;
       profileAvatar.alt = "Profile avatar";
       evt.target.reset();
+      disableButton(submitButton, settings);
       const inputList = Array.from(
         avatarForm.querySelectorAll(settings.inputSelector)
       );
@@ -259,6 +266,14 @@ profileEditButton.addEventListener("click", () => {
     settings
   );
   openModal(editModal);
+});
+
+deleteModalCloseButton.addEventListener("click", () => {
+  closeModal(deleteModal);
+});
+
+deleteModalCancelButton.addEventListener("click", () => {
+  closeModal(deleteModal);
 });
 
 editModalCloseButton.addEventListener("click", () => {

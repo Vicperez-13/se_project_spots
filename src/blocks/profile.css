@@ -14,7 +14,6 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
-
   visibility: hidden;
 }
 
@@ -123,9 +122,16 @@
     padding-top: 20px;
   }
   .profile__avatar-button {
+    visibility: hidden;
+    height: 32px;
+    width: 32px;
+    left: 25px;
+    top: 42px;
+    background-color: transparent;
+    border: none;
+  }
+  .profile__avatar-button:hover {
     visibility: visible;
-    /* finish styles
-     */
   }
   .profile__avatar-button::after {
     content: "";
@@ -135,6 +141,13 @@
     margin: 0 0 12px;
     height: 80px;
     width: 80px;
+    object-fit: cover;
+  }
+  .profile__pencil-icon {
+    display: flex;
+    position: relative;
+    left: 23px;
+    top: -3px;
   }
   .profile__name {
     font-size: 20px;
@@ -160,5 +173,15 @@
   }
   .profile__add-button-icon {
     margin-right: 8px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .profile__avatar {
+    margin: 0 auto;
+  }
+
+  .profile__avatar-container {
+    margin: 0 auto;
+    position: relative;
   }
 }
