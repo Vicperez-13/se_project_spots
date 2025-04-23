@@ -248,7 +248,6 @@ function handleAvatarSubmit(evt) {
       const inputList = Array.from(
         avatarForm.querySelectorAll(settings.inputSelector)
       );
-      resetValidation(avatarForm, inputList, settings);
       closeModal(avatarModal);
     })
     .catch(console.error)
